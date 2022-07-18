@@ -1,0 +1,24 @@
+{% load menu_categories %}
+{% load static %}
+<nav id="site-navigation" class="main-navigation">
+    <button class="menu-toggle">Menu</button>
+    <a class="skip-link screen-reader-text" href="#content">Skip to content</a>
+    <div class="menu-menu-1-container">
+        <ul id="menu-menu-1" class="menu">
+            <li><a href="{% url 'home' %}">Home</a></li>
+            <li><a href="{% url 'about' %}">About</a></li>
+            <li><a href="{% url 'shop' %}">Shop</a></li>
+            <li><a href="#">Category</a>
+                <ul class="sub-menu">
+                    {% show_categories %}
+                </ul>
+            </li>
+            <li><a href="{% url 'contact' %}">Contact</a></li>
+            <li><a href="{% url "cart:cart_detail" %}"><img src="{% static "images/logo_bag.svg" %}" width="25" alt="Shopping Bag">
+                {% if cart.cart|length == 0  %}{% else %}({{ cart.cart|length }}){% endif %}</a></li>
+            <li><a href=""><img src="{% static "images/logo_favorite.svg" %}" width="25" alt="Favorites"></a></li>
+            <li><a href=""><img src="{% static "images/logo_login.svg" %}" width="25" alt="login"></a></li>
+        </ul>
+    </div>
+</nav>
+</header>

@@ -1,0 +1,33 @@
+
+{% extends "base.html" %}
+ {% block headerstyle %}
+    <body class="home page page-template page-template-template-portfolio page-template-template-portfolio-php">
+{% endblock %}
+{% block title %}
+    Checkout
+{% endblock %}
+{% block content %}
+ <div class="wpcmsdev-columns">
+    <div class="column column-width-one-half">
+        <h1>Your cart</h1>
+        <ol>
+            {% for item in cart %}
+                <dl class="count">
+                    <img src="{{ item.product.photo.url }}" width="50"> <b>{{ item.quantity }}</b>x {{ item.product.name }}
+                    <span class="price"><b>${{ item.total_price }}</b></span>
+                </dl>
+            {% endfor %}
+        </ol>
+        <p class="amount">Total: <b>${{ cart.get_total_price }}</b></p>
+    </div>
+ <div class="column column-width-one-half">
+    <form class="wpcf7" action="" method="post" id="contactform">
+    <div class="form">
+        {{ form.as_p }}
+        <p><input type="submit" value="Done"></p>
+        {% csrf_token %}
+    </div>
+    </form>
+ </div>
+ </div>
+{% endblock %}

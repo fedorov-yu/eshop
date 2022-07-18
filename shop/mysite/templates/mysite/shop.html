@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+
+{% block headerstyle %}
+    <body class="archive post-type-archive post-type-archive-product woocommerce woocommerce-page">
+{% endblock %}
+{% block title %}{{ title }}{% endblock %}
+{% block content %}
+    <div id="content" class="site-content">
+        <div id="primary" class="content-area column full">
+            <main id="main" class="site-main" role="main">
+                <p class="woocommerce-result-count">
+                    Showing {{ count_of_products }} results
+                </p>
+                <form class="woocommerce-ordering" method="get" id="sortProduct">
+                    <select name="orderby" class="orderby">
+                        <option value="" >Default sort</option>
+                        <option value="-views">Sort by popularity</option>
+                        <option value="-created_at">Sort by newness</option>
+                        <option value="price">Sort by price: low to high</option>
+                        <option value="-price">Sort by price: high to low</option>
+                    </select>
+                        <input type="submit" value="Sort">
+                </form>
+                <ul class="products">
+                    {% for product in products %}
+                        <li class="{% cycle 'first' '' '' 'last' %} product">
+                            {% if product.photo %}
+                                <a href="{{ product.get_absolute_url }}">
+                                    <img src="{{ product.photo.url }}" alt="{{ product.name }}">
+                                    <h3>{{ product.name }}</h3>
+                                    <span class="price"><span class="amount">${{ product.price }}</span></span>
+                            {% endif %}
+                            </a>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </main>
+            <!-- #main -->
+        </div>
+        <!-- #primary -->
+    </div>
+    <!-- #content -->
+    </div>
+    <!-- .container -->
+{% endblock %}

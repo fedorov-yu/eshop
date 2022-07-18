@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block headerstyle %}
+    {#    <body class="archive post-type-archive post-type-archive-product woocommerce woocommerce-page">#}
+{% endblock %}
+{% block title %} Корзина покупок {% endblock %}
+
+{% block content %}
+    <h1>Your shopping cart</h1>
+    <table class="cart">
+        <thead>
+        <tr>
+            <th></th>
+            <th>Product</th>
+            <th>Quantity</th>
+            <th></th>
+            <th>Cost</th>
+            <th>Price</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for item in cart %}
+            {% with product=item.product %}
+                <tr>
+                    <td>
+                        <a href="{{ product.get_absolute_url }}">
+                            <img src="{% if product.photo %}{{ product.photo.url }}{% endif %} " width="50"
+                                 alt="{{ product.name }}">
+                        </a>
+                    </td>
+                    <td>{{ product.name }}</td>
+                    <td>{{ item.quantity }}</td>
+                    <td>
+                        <a href="{% url "cart:cart_remove" product.pk %}"><img
+                                src="{% static "images/logo_trash.svg" %}" width="20" alt="trash"></a>
+                    </td>
+                    <td class="num">${{ item.price }}</td>
+                    <td class="num">${{ item.total_price }}</td>
+                </tr>
+            {% endwith %}
+        {% endfor %}
+        <tr class="total">
+            <td>Total</td>
+            <td colspan="4"></td>
+            <td class="num">${{ cart.get_total_price }}</td>
+        </tr>
+        </tbody>
+    </table>
+        <button type="submit"
+            class="single_add_to_cart_button button alt">
+            <a href="{% url "shop" %}">Continue shopping</a>
+    </button>
+
+    <button type="submit"
+            class="single_add_to_cart_button button alt">
+        <a href="{% url 'orders:order_create' %}">Checkout</a>
+    </button>
+
+{% endblock %}
