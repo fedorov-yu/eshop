@@ -1,5 +1,5 @@
 # eshop
-Ecommerce website built with Django 4, Python 3.9
+Ecommerce website built with Django 4, Python 3.9, Celery 5.2.7, Flower 1.1.0, broker - rabbitmq 3.10.5
 
 ## Main page
 ![main](https://user-images.githubusercontent.com/80154971/179810024-43aa4016-6bf9-4cd8-a6e5-c0e1292c0d41.png)
@@ -39,6 +39,8 @@ pip install -r requirements.txt
 python manage.py makemigrations
 
 python manage.py migrate
+
+python manage.py collectstatic
 
 python manage.py runserver
 
